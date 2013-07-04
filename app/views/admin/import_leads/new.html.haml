@@ -1,0 +1,18 @@
+.remote
+  = form_for(:import, :url => admin_import_leads_path, :html => { :multipart => true }) do |f|
+
+    %table
+      %tr
+        %td
+          .label.top #{t :assigned_to}:
+          = f.select :assigned_to, User.all.map { |u| [ u.name, u.id ] }
+        %td= spacer
+      %tr
+        %td
+          .label.top #{t :csv_file}:
+          = f.file_field :csv_file
+
+    .buttonbar
+      = f.submit t(:import_leads)
+      #{t :or}
+      = link_to_cancel new_lead_path
